@@ -29,7 +29,7 @@ public class HelloControllerTest {
 
   
   @Before
-  public void setup(){
+  public void contextSetup(){
     mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
   }
   
@@ -38,7 +38,7 @@ public class HelloControllerTest {
    * @throws Exception
    */
   @Test
-  public void testServicewithValidInput() throws Exception{
+  public void testServicewithValidInput() throws Exception {
     mockMvc.perform(MockMvcRequestBuilders.get("/matchphrase").param("input", "I have a sore throat and headache"))
       .andExpect(MockMvcResultMatchers.status().isOk())
       .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.containsInAnyOrder("sore throat","headache")));

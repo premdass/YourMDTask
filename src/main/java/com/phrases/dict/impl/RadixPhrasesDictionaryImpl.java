@@ -52,18 +52,18 @@ public class RadixPhrasesDictionaryImpl implements InitializingBean, PhrasesDict
    * service built using radix tree The inputs are space padded , since the tree implementation
    * returns partial matches which we dont need
    * 
-   * @param inputString
+   * @param input
    * @return
    */
   public String[] getMatchingPhrases(String inputString) {
-    inputString = inputString.trim().replaceAll(" +", " ");
-    inputString = " " + inputString + " ";
-    List<CharSequence> results = Iterables.toList(tree.getKeysContainedIn(inputString));
+    String input = inputString.trim().replaceAll(" +", " ");
+    input = " " + input + " ";
+    List<CharSequence> results = Iterables.toList(tree.getKeysContainedIn(input));
     String[] matchedPhrases = results.toArray(new String[results.size()]);
     for (int i = 0; i < matchedPhrases.length; i++) {
       matchedPhrases[i] = matchedPhrases[i].trim();
     }
-    logger.info("For string "+inputString+" found matches "+results);
+    logger.info("For string "+input+" found matches "+results);
     return matchedPhrases;
   }
 
